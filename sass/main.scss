@@ -1,109 +1,210 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;700&display=swap');
+// Colors
+$bg-color: #2b213a;
+$text-color: #fff0f5;
+$accent-color: #ff0055;
+$link-color: #00f3ff;
+$border-color: #fff;
 
-$bg-dark: #050510;
-$bg-light: #1a1a40;
-$accent: #64ffda;
-$text-light: #e6f1ff;
-$text-dim: #8892b0;
+// Fonts
+$font-stack: 'VT323', monospace;
 
-:root {
-  --bg: #{$bg-dark};
-  --text: #{$text-light};
-  --accent: #{$accent};
+// Mixins & Functions
+@function multiple-box-shadow($n) {
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+  }
+  @return unquote($value);
 }
 
-* { box-sizing: border-box; }
+// Reset
+* {
+  box-sizing: border-box;
+}
 
 body {
-    margin: 0;
-    font-family: 'Work Sans', sans-serif;
-    background: radial-gradient(ellipse at bottom, $bg-light 0%, $bg-dark 100%);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background: $bg-color;
+  color: $text-color;
+  font-family: $font-stack;
+  font-size: 20px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
 }
 
-h1, h2, h3 { font-family: 'Space Mono', monospace; font-weight: 700; }
-a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-a:hover { color: lighten($accent, 10%); text-decoration: underline; }
-
-/* Stars Animation */
-@function random-range($min, $max) {
-  @return random() * ($max - $min) + $min;
+// Scanlines Overlay
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 999;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
 }
 
-.stars {
+// Star Animations
+$shadows-small:  multiple-box-shadow(700);
+$shadows-medium: multiple-box-shadow(200);
+$shadows-big:    multiple-box-shadow(100);
+
+.stars-container {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
   z-index: -1;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 }
 
-.star {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0;
-  animation: twinkle var(--duration) ease-in-out infinite;
+#stars {
+  width: 1px; height: 1px;
+  background: transparent;
+  box-shadow: $shadows-small;
+  animation: animStar 50s linear infinite;
+    
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 1px; height: 1px;
+    background: transparent;
+    box-shadow: $shadows-small;
+  }
+}
+
+#stars2 {
+  width: 2px; height: 2px;
+  background: transparent;
+  box-shadow: $shadows-medium;
+  animation: animStar 100s linear infinite;
+    
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 2px; height: 2px;
+    background: transparent;
+    box-shadow: $shadows-medium;
+  }
+}
+
+#stars3 {
+  width: 3px; height: 3px;
+  background: transparent;
+  box-shadow: $shadows-big;
+  animation: animStar 150s linear infinite;
+    
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 3px; height: 3px;
+    background: transparent;
+    box-shadow: $shadows-big;
+  }
+}
+
+@keyframes animStar {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-2000px); }
+}
+
+// Typography
+h1, h2, h3 {
+  font-weight: 400;
+  text-transform: uppercase;
+  color: $accent-color;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+  margin-top: 1.5em;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  border-bottom: 2px dashed $link-color;
   
-  @for $i from 1 through 50 {
-    &:nth-child(#{$i}) {
-      --size: #{random-range(1px, 3px)};
-      --top: #{random(100)}vh;
-      --left: #{random(100)}vw;
-      --duration: #{random-range(2s, 6s)};
-      --delay: #{random-range(0s, 5s)};
+  &:hover {
+    color: #fff;
+    background-color: $link-color;
+    border-bottom-style: solid;
+  }
+}
+
+// Layout
+header {
+  padding: 2rem;
+  border-bottom: 4px solid $border-color;
+  background: rgba(0,0,0,0.3);
+  
+  nav {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .logo {
+      font-size: 2rem;
+      color: #ffd700; // Gold
+      border: none;
+      text-shadow: 3px 3px 0 #000;
       
-      width: var(--size);
-      height: var(--size);
-      top: var(--top);
-      left: var(--left);
-      animation-delay: var(--delay);
+      &:hover { background: none; color: #fff; }
+    }
+    
+    .links a {
+      margin-left: 1.5rem;
+      font-size: 1.2rem;
     }
   }
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 4px white; }
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 4px solid $border-color;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.5);
 }
 
-/* Landing Page Hero */
-.hero {
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
+footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
 }
 
-.hero h1 {
-    font-size: 4rem;
-    margin: 0;
-    letter-spacing: -2px;
-    background: linear-gradient(to right, #fff, #a5b4fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: $text-dim;
-    margin-top: 1rem;
-    max-width: 600px;
-}
-
-.hero nav {
-    margin-top: 2rem;
-    display: flex;
-    gap: 1.5rem;
-    font-family: 'Space Mono', monospace;
-}
-
+// Post List (Index)
 .post-list {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
+  list-style: none;
+  padding: 0;
+  
+  li {
+    margin-bottom: 1.5rem;
+    border-bottom: 2px dotted rgba(255,255,255,0.2);
+    padding-bottom: 1rem;
+    
+    span {
+      display: block;
+      font-size: 0.9rem;
+      color: $accent-color;
+      margin-bottom: 0.2rem;
+    }
+    
+    a {
+      font-size: 1.5rem;
+      border: none;
+      
+      &:hover {
+        background: none;
+        color: $accent-color;
+        &::before { content: "> "; }
+      }
+    }
+  }
 }

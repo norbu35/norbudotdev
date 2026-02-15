@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="stars">
-        {% for i in range(end=50) %}
-        <div class="star"></div>
-        {% endfor %}
+    <div class="stars-container">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
     </div>
 
     <header>
-        <nav style="display: flex; justify-content: space-between; padding: 1rem 2rem; align-items: center;">
-            <a href="{{ get_url(path="@/_index.md") }}" style="font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem;">NORBU.DEV</a>
-            <div style="display: flex; gap: 1rem;">
+        <nav>
+            <a href="{{ get_url(path="@/_index.md") }}" class="logo">NORBU.DEV</a>
+            <div class="links">
                 <a href="{{ get_url(path="@/_index.md") }}">Home</a>
                 <a href="https://github.com/norbu35">GitHub</a>
             </div>
@@ -29,7 +30,7 @@
         {% block content %}{% endblock content %}
     </main>
 
-    <footer style="text-align: center; padding: 2rem; opacity: 0.5; font-size: 0.8rem;">
+    <footer>
         <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author | default(value="Norbu") }} • Built with Zola & Rust 🦀</p>
     </footer>
 </body>
