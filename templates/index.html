@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <h1 style="font-size: 5rem; font-weight: 700; margin: 0; background: linear-gradient(to right, #ffffff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NORBU</h1>
+    <h2 style="font-size: 1.5rem; color: #a5b4fc; margin-top: 1rem; font-weight: 400; letter-spacing: 2px;">DEVELOPER • EXPLORER • MONGOLIA</h2>
+    
+    <div style="margin-top: 3rem; display: flex; gap: 2rem;">
+        <a href="{{ get_url(path="@/first-post.md") }}" style="padding: 1rem 2rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 4px; transition: all 0.3s;">Read Blog</a>
+        <a href="https://github.com/norbu35" style="padding: 1rem 2rem; background: rgba(100, 255, 218, 0.1); border: 1px solid rgba(100, 255, 218, 0.4); color: #64ffda; border-radius: 4px; transition: all 0.3s;">View Code</a>
+    </div>
+</section>
+
+<section class="recent-posts" style="max-width: 800px; margin: 4rem auto; padding: 2rem;">
+    <h3 style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 2rem; color: #8892b0;">LATEST TRANSMISSIONS</h3>
+    {% for page in section.pages | slice(end=3) %}
+        <article style="margin-bottom: 3rem;">
+            <h4 style="font-size: 1.8rem; margin-bottom: 0.5rem;"><a href="{{ page.permalink }}" style="color: #e6f1ff; text-decoration: none;">{{ page.title }}</a></h4>
+            <div style="font-size: 0.9rem; color: #8892b0; margin-bottom: 1rem;">{{ page.date | date(format="%B %d, %Y") }}</div>
+            <p style="color: #ccd6f6; line-height: 1.6;">{{ page.description | default(value=page.summary) | safe }}</p>
+            <a href="{{ page.permalink }}" style="font-size: 0.9rem; color: #64ffda; text-transform: uppercase; letter-spacing: 1px;">Read More &rarr;</a>
+        </article>
+    {% else %}
+        <p style="color: #8892b0;">No transmissions received yet.</p>
+    {% endfor %}
+</section>
+{% endblock content %}

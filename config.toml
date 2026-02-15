@@ -1,0 +1,7 @@
+title = "Norbu's Tech Log"
+base_url = "https://norbu.dev"
+compile_sass = true
+
+[extra]
+author = "Norbu"
+repo = "https://github.com/norbu35"

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ get_url(path="main.css") }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <div class="stars">
+        {% for i in range(end=50) %}
+        <div class="star"></div>
+        {% endfor %}
+    </div>
+
+    <header>
+        <nav style="display: flex; justify-content: space-between; padding: 1rem 2rem; align-items: center;">
+            <a href="{{ get_url(path="@/_index.md") }}" style="font-family: 'Space Mono'; font-weight: 700; font-size: 1.2rem;">NORBU.DEV</a>
+            <div style="display: flex; gap: 1rem;">
+                <a href="{{ get_url(path="@/_index.md") }}">Home</a>
+                <a href="https://github.com/norbu35">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; opacity: 0.5; font-size: 0.8rem;">
+        <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author | default(value="Norbu") }} • Built with Zola & Rust 🦀</p>
+    </footer>
+</body>
+</html>

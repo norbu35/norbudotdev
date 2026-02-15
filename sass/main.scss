@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;700&display=swap');
+
+$bg-dark: #050510;
+$bg-light: #1a1a40;
+$accent: #64ffda;
+$text-light: #e6f1ff;
+$text-dim: #8892b0;
+
+:root {
+  --bg: #{$bg-dark};
+  --text: #{$text-light};
+  --accent: #{$accent};
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Work Sans', sans-serif;
+    background: radial-gradient(ellipse at bottom, $bg-light 0%, $bg-dark 100%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: 'Space Mono', monospace; font-weight: 700; }
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: lighten($accent, 10%); text-decoration: underline; }
+
+/* Stars Animation */
+@function random-range($min, $max) {
+  @return random() * ($max - $min) + $min;
+}
+
+.stars {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle var(--duration) ease-in-out infinite;
+  
+  @for $i from 1 through 50 {
+    &:nth-child(#{$i}) {
+      --size: #{random-range(1px, 3px)};
+      --top: #{random(100)}vh;
+      --left: #{random(100)}vw;
+      --duration: #{random-range(2s, 6s)};
+      --delay: #{random-range(0s, 5s)};
+      
+      width: var(--size);
+      height: var(--size);
+      top: var(--top);
+      left: var(--left);
+      animation-delay: var(--delay);
+    }
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 4px white; }
+}
+
+/* Landing Page Hero */
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin: 0;
+    letter-spacing: -2px;
+    background: linear-gradient(to right, #fff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: $text-dim;
+    margin-top: 1rem;
+    max-width: 600px;
+}
+
+.hero nav {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.post-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
