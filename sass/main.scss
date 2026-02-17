@@ -64,6 +64,17 @@ body.konami-mode {
   }
 }
 
+// CRT Screen Effect Overlay
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(circle, rgba(18, 16, 16, 0) 60%, rgba(0,0,0,0.6) 100%);
+  z-index: 998;
+  pointer-events: none;
+}
+
 // Scanlines Overlay
 body::after {
   content: " ";
@@ -157,49 +168,6 @@ h1, h2, h3 {
   margin-top: 1.5em;
 }
 
-// Glitch Effect
-.glitch {
-  position: relative;
-  
-  &::before, &::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: $bg-color;
-  }
-  
-  &::before {
-    left: 2px;
-    text-shadow: -1px 0 red;
-    clip: rect(24px, 550px, 90px, 0);
-    animation: glitch-anim-2 3s infinite linear alternate-reverse;
-  }
-  
-  &::after {
-    left: -2px;
-    text-shadow: -1px 0 blue;
-    clip: rect(85px, 550px, 140px, 0);
-    animation: glitch-anim 2.5s infinite linear alternate-reverse;
-  }
-}
-
-@keyframes glitch-anim {
-  $steps: 20;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100)+px, 9999px, random(100)+px, 0);
-    }
-  }
-}
-@keyframes glitch-anim-2 {
-  $steps: 20;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100)+px, 9999px, random(100)+px, 0);
-    }
-  }
-}
-
 a {
   color: $link-color;
   text-decoration: none;
@@ -271,7 +239,7 @@ main {
   }
 }
 
-// Terminal Window
+// Interactive Terminal Styling
 .terminal-window {
   background: $console-bg;
   border: 2px solid #555;
@@ -280,6 +248,9 @@ main {
   margin-bottom: 2rem;
   font-family: 'Courier New', monospace;
   box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  min-height: 300px; /* Ensure space for output */
+  display: flex;
+  flex-direction: column;
   
   .terminal-header {
     border-bottom: 1px solid #333;
@@ -290,23 +261,44 @@ main {
     display: flex;
     justify-content: space-between;
   }
+
+  .terminal-body {
+      flex: 1;
+      overflow-y: auto;
+      
+      /* Hide scrollbar within terminal but keep function */
+      &::-webkit-scrollbar { width: 0px; }
+  }
+  
+  .input-line {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+  }
   
   .prompt {
     color: $console-green;
-    &::before { content: "root@norbu:~$ "; }
+    margin-right: 10px;
+    white-space: nowrap;
   }
   
-  .cursor {
-    display: inline-block;
-    width: 10px;
-    height: 1.2em;
-    background: $console-green;
-    vertical-align: middle;
-    animation: blink 1s step-end infinite;
+  #terminal-input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      width: 100%;
+      outline: none;
+      caret-color: $console-green;
   }
+  
+  /* Output Styling */
+  .command-history { color: #888; margin-top: 5px; }
+  .command-output { color: #ccc; white-space: pre-wrap; margin-bottom: 10px; }
+  .system-msg { color: $link-color; margin-bottom: 5px; }
+  .error { color: $accent-color; }
 }
-
-@keyframes blink { 50% { opacity: 0; } }
 
 // RPG Stats
 .rpg-stats {
@@ -332,8 +324,8 @@ main {
         height: 100%;
         background: $link-color;
         box-shadow: 0 0 10px $link-color;
-        width: 0; // JS or inline style will set this
-        transition: width 1s ease-out;
+        width: 0; /* JS animates this */
+        transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
       }
     }
   }
@@ -352,8 +344,15 @@ main {
     padding: 1rem;
     border-bottom: 10px solid #222; // The "pins" area
     transition: transform 0.2s;
+    cursor: pointer;
     
-    &:hover { transform: translateY(-5px); }
+    &:hover { 
+        transform: translateY(-5px); 
+        
+        .label {
+            filter: brightness(1.1);
+        }
+    }
     
     .label {
       background: #eee;

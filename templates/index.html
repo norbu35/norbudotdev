@@ -8,8 +8,11 @@
             <span>CONN: SECURE</span>
         </div>
         <div class="terminal-body">
-            <div id="typing-output"></div>
-            <span class="prompt"></span><span class="cursor">_</span>
+            <div id="terminal-output"></div>
+            <div class="input-line">
+                <span id="terminal-prefix" class="prompt">root@norbu:~$</span>
+                <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false" placeholder="Type 'help'...">
+            </div>
         </div>
     </div>
 </section>
@@ -19,22 +22,22 @@
     <div class="rpg-stats">
         <div class="stat-card">
             <h4>JAVA / SPRING</h4>
-            <div class="stat-bar"><div class="fill" style="width: 90%; background: #f89820;"></div></div>
+            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="90%" style="background: #f89820;"></div></div>
             <small>LVL 35 WIZARD</small>
         </div>
         <div class="stat-card">
             <h4>NODE.JS</h4>
-            <div class="stat-bar"><div class="fill" style="width: 85%; background: #68a063;"></div></div>
+            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="85%" style="background: #68a063;"></div></div>
             <small>ASYNC ROGUE</small>
         </div>
         <div class="stat-card">
             <h4>RUST</h4>
-            <div class="stat-bar"><div class="fill" style="width: 40%; background: #dea584;"></div></div>
+            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="40%" style="background: #dea584;"></div></div>
             <small>APPRENTICE</small>
         </div>
         <div class="stat-card">
             <h4>PYTHON</h4>
-            <div class="stat-bar"><div class="fill" style="width: 60%; background: #4b8bbe;"></div></div>
+            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="60%" style="background: #4b8bbe;"></div></div>
             <small>SCRIPT SORCERER</small>
         </div>
     </div>
@@ -92,48 +95,19 @@
     </ul>
 </section>
 
+<script src="{{ get_url(path='js/terminal.js') }}"></script>
 <script>
-    const lines = [
-        "Initializing Norbu.dev sequence...",
-        "Loading assets: 100%",
-        "Decrypting user profile...",
-        "WELCOME, USER.",
-        "System: READY."
-    ];
-    
-    let lineIndex = 0;
-    let charIndex = 0;
-    const outputDiv = document.getElementById('typing-output');
-    
-    function typeWriter() {
-        if (lineIndex < lines.length) {
-            const currentLine = lines[lineIndex];
-            
-            // Create line div if it doesn't exist
-            let lineDiv = document.getElementById(`line-${lineIndex}`);
-            if (!lineDiv) {
-                lineDiv = document.createElement('div');
-                lineDiv.id = `line-${lineIndex}`;
-                lineDiv.style.marginBottom = '5px';
-                // Last line white, others green
-                lineDiv.style.color = lineIndex === lines.length - 1 ? '#fff' : '#0f0'; 
-                outputDiv.appendChild(lineDiv);
+    // Animate Stats Bars on Scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-fill');
+                });
             }
-            
-            if (charIndex < currentLine.length) {
-                lineDiv.textContent += currentLine.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 30 + Math.random() * 50);
-            } else {
-                lineIndex++;
-                charIndex = 0;
-                setTimeout(typeWriter, 300);
-            }
-        }
-    }
+        });
+    });
     
-    window.onload = function() {
-        setTimeout(typeWriter, 500);
-    };
+    document.querySelectorAll('.rpg-stats').forEach(stat => observer.observe(stat));
 </script>
 {% endblock content %}

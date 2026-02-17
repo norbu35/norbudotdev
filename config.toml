@@ -5,3 +5,5 @@ compile_sass = true
 [extra]
 author = "Norbu"
 repo = "https://github.com/norbu35"
+version = "v2.0.4-cyber"
+terminal_welcome = "Wake up, Neo..."

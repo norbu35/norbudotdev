@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}404 - SYSTEM FAILURE{% endblock title %}
+
+{% block content %}
+<div class="error-container" style="text-align: center; padding: 4rem 0;">
+    <h1 class="glitch" data-text="404 ERROR" style="font-size: 6rem; margin: 0; color: #ff0055;">404 ERROR</h1>
+    <h2 style="color: #fff; margin-bottom: 2rem;">SIGNAL LOST</h2>
+    
+    <div class="terminal-window" style="max-width: 600px; margin: 0 auto; text-align: left;">
+        <div class="terminal-header">
+            <span>DIAGNOSTIC TOOL</span>
+            <span>STATUS: CRITICAL</span>
+        </div>
+        <div class="terminal-body" style="color: #ff5555; font-family: monospace;">
+            <p>> ERROR: PAGE_NOT_FOUND_EXCEPTION</p>
+            <p>> TRACE: The requested URL was not found on this server.</p>
+            <p>> MEMORY DUMP: 0x00000000</p>
+            <p>> SUGGESTION: Return to base coordinates immediately.</p>
+            <br>
+            <a href="{{ get_url(path="@/_index.md") }}" style="color: #00f3ff; border-bottom: 2px solid #00f3ff;">[ INITIATE EMERGENCY RECALL ]</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Glitch effect enhancement
+    setInterval(() => {
+        const title = document.querySelector('.glitch');
+        if(Math.random() > 0.9) {
+            title.style.transform = `translate(${Math.random()*4-2}px, ${Math.random()*4-2}px)`;
+            setTimeout(() => title.style.transform = 'translate(0,0)', 100);
+        }
+    }, 200);
+</script>
+{% endblock content %}
