@@ -241,6 +241,7 @@ main {
 
 // Interactive Terminal Styling
 .terminal-window {
+  position: relative;
   background: $console-bg;
   border: 2px solid #555;
   border-radius: 4px;

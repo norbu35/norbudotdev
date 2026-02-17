@@ -79,6 +79,33 @@ const commands = {
 };
 
 let matrixInterval;
+let columns, drops;
+const matrixConfig = {
+    fontSize: 16,
+    horizontalSpacing: 11, // Adjusted for better character density
+    letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%'
+};
+
+function resizeCanvas() {
+    const canvas = document.getElementById('matrix-canvas');
+    if (!canvas || canvas.style.display !== 'block') return;
+    
+    const parent = canvas.parentElement;
+    canvas.width = parent.clientWidth;
+    canvas.height = parent.clientHeight;
+
+    columns = Math.floor(canvas.width / matrixConfig.horizontalSpacing);
+    
+    // Only reset drops if columns changed significantly
+    if (!drops || drops.length !== columns) {
+        const oldDrops = drops || [];
+        drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = oldDrops[x] || Math.floor(Math.random() * canvas.height / matrixConfig.fontSize);
+        }
+    }
+}
+
 function toggleMatrix() {
     const canvas = document.getElementById('matrix-canvas');
     if (!canvas) return;
@@ -86,36 +113,28 @@ function toggleMatrix() {
     if (canvas.style.display === 'block') {
         canvas.style.display = 'none';
         clearInterval(matrixInterval);
+        window.removeEventListener('resize', resizeCanvas);
         return;
     }
 
     canvas.style.display = 'block';
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
     const ctx = canvas.getContext('2d');
-    
-    // Set canvas size to parent container
-    const parent = canvas.parentElement;
-    canvas.width = parent.clientWidth;
-    canvas.height = parent.clientHeight;
-
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = [];
-
-    for (let x = 0; x < columns; x++) drops[x] = 1;
 
     function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         ctx.fillStyle = '#0F0';
-        ctx.font = fontSize + 'px monospace';
+        ctx.font = matrixConfig.fontSize + 'px monospace';
 
         for (let i = 0; i < drops.length; i++) {
-            const text = letters.charAt(Math.floor(Math.random() * letters.length));
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            const text = matrixConfig.letters.charAt(Math.floor(Math.random() * matrixConfig.letters.length));
+            ctx.fillText(text, i * matrixConfig.horizontalSpacing, drops[i] * matrixConfig.fontSize);
 
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            if (drops[i] * matrixConfig.fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
             }
             drops[i]++;
