@@ -280,6 +280,7 @@ main {
     color: $console-green;
     margin-right: 10px;
     white-space: nowrap;
+    &::before { content: none; }
   }
   
   #terminal-input {
