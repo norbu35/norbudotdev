@@ -265,6 +265,8 @@ main {
   .terminal-body {
       flex: 1;
       overflow-y: auto;
+      z-index: 2;
+      position: relative;
       
       /* Hide scrollbar within terminal but keep function */
       &::-webkit-scrollbar { width: 0px; }
