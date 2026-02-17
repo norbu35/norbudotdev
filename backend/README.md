@@ -22,10 +22,15 @@ This simple Python service connects your static website to a local Large Languag
 
 2.  Install dependencies:
     ```bash
-    pip install fastapi uvicorn httpx pydantic
+    pip install fastapi uvicorn httpx pydantic slowapi
     ```
 
-3.  Run the server:
+3.  **Run with Ollama Limits:**
+    The backend is configured to use `norbu-os` model by default with strict limits:
+    *   **Rate Limit:** 5 requests per minute per IP.
+    *   **Max Prompt:** 200 characters.
+    *   **Max Response:** 150 tokens.
+    
     ```bash
     export OLLAMA_URL="http://localhost:11434/api/generate"
     python3 main.py
