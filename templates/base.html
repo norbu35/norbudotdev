@@ -32,20 +32,29 @@
     </footer>
 
     <script>
-        // Konami Code Easter Egg
-        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        // Konami Code Easter Egg - Robust Edition
+        const konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
         let cursor = 0;
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === konamiCode[cursor]) {
+            const key = e.key.toLowerCase();
+            
+            if (key === konamiCode[cursor]) {
                 cursor++;
+                console.log(`Konami Sequence: ${cursor}/${konamiCode.length}`);
                 if (cursor === konamiCode.length) {
                     document.body.classList.toggle('konami-mode');
+                    console.log('CHEAT CODE ACTIVATED: SUPER MODE');
                     cursor = 0;
-                    alert('CHEAT CODE ACTIVATED: SUPER MODE');
+                    // Only alert if we just enabled it
+                    if (document.body.classList.contains('konami-mode')) {
+                        alert('CHEAT CODE ACTIVATED: SUPER MODE');
+                    }
                 }
             } else {
-                cursor = 0;
+                // Reset, but allow restarting the sequence if the current key is the first one
+                cursor = (key === konamiCode[0]) ? 1 : 0;
+                if (cursor === 1) console.log('Konami Sequence: 1/10');
             }
         });
     </script>
