@@ -22,6 +22,32 @@ const commands = {
         return 'System rebooting...';
     },
     sudo: () => 'Access denied. You are not in the sudoers file. This incident will be reported.',
+    rm: (args) => {
+        if (args.includes('-rf')) {
+            const output = document.getElementById('terminal-output');
+            const div = document.createElement('div');
+            div.className = 'system-msg';
+            div.style.color = '#ff5555';
+            output.appendChild(div);
+            
+            const spinner = ['|', '/', '-', '\\'];
+            let i = 0;
+            
+            return new Promise(resolve => {
+                const interval = setInterval(() => {
+                    div.innerText = `Deleting all system files... ${spinner[i]}`;
+                    i = (i + 1) % spinner.length;
+                }, 100);
+
+                setTimeout(() => {
+                    clearInterval(interval);
+                    div.innerText = 'Deleting all system files... [FAILED]';
+                    resolve('just kidding lol 😂');
+                }, 4000);
+            });
+        }
+        return 'rm: missing operand';
+    },
     exit: () => 'There is no escape.',
     matrix: () => {
         toggleMatrix();
