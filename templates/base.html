@@ -33,5 +33,24 @@
     <footer>
         <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author | default(value="Norbu") }} • Built with Zola & Rust 🦀</p>
     </footer>
+
+    <script>
+        // Konami Code Easter Egg
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let cursor = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[cursor]) {
+                cursor++;
+                if (cursor === konamiCode.length) {
+                    document.body.classList.toggle('konami-mode');
+                    cursor = 0;
+                    alert('CHEAT CODE ACTIVATED: SUPER MODE');
+                }
+            } else {
+                cursor = 0;
+            }
+        });
+    </script>
 </body>
 </html>

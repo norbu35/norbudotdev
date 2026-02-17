@@ -1,27 +1,139 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="hero" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-    <h1 style="font-size: 5rem; font-weight: 700; margin: 0; background: linear-gradient(to right, #ffffff, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NORBU</h1>
-    <h2 style="font-size: 1.5rem; color: #a5b4fc; margin-top: 1rem; font-weight: 400; letter-spacing: 2px;">DEVELOPER • EXPLORER • MONGOLIA</h2>
-    
-    <div style="margin-top: 3rem; display: flex; gap: 2rem;">
-        <a href="{{ get_url(path="@/first-post.md") }}" style="padding: 1rem 2rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 4px; transition: all 0.3s;">Read Blog</a>
-        <a href="https://github.com/norbu35" style="padding: 1rem 2rem; background: rgba(100, 255, 218, 0.1); border: 1px solid rgba(100, 255, 218, 0.4); color: #64ffda; border-radius: 4px; transition: all 0.3s;">View Code</a>
+<section class="hero-terminal">
+    <div class="terminal-window" id="main-terminal">
+        <div class="terminal-header">
+            <span>NORBU-OS v2.0</span>
+            <span>CONN: SECURE</span>
+        </div>
+        <div class="terminal-body">
+            <div id="typing-output"></div>
+            <span class="prompt"></span><span class="cursor">_</span>
+        </div>
     </div>
 </section>
 
-<section class="recent-posts" style="max-width: 800px; margin: 4rem auto; padding: 2rem;">
-    <h3 style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 2rem; color: #8892b0;">LATEST TRANSMISSIONS</h3>
-    {% for page in section.pages | slice(end=3) %}
-        <article style="margin-bottom: 3rem;">
-            <h4 style="font-size: 1.8rem; margin-bottom: 0.5rem;"><a href="{{ page.permalink }}" style="color: #e6f1ff; text-decoration: none;">{{ page.title }}</a></h4>
-            <div style="font-size: 0.9rem; color: #8892b0; margin-bottom: 1rem;">{{ page.date | date(format="%B %d, %Y") }}</div>
-            <p style="color: #ccd6f6; line-height: 1.6;">{{ page.description | default(value=page.summary) | safe }}</p>
-            <a href="{{ page.permalink }}" style="font-size: 0.9rem; color: #64ffda; text-transform: uppercase; letter-spacing: 1px;">Read More &rarr;</a>
-        </article>
-    {% else %}
-        <p style="color: #8892b0;">No transmissions received yet.</p>
-    {% endfor %}
+<section class="character-sheet" style="margin-top: 4rem;">
+    <h2><span style="color: #fff;">></span> CHARACTER STATS</h2>
+    <div class="rpg-stats">
+        <div class="stat-card">
+            <h4>JAVA / SPRING</h4>
+            <div class="stat-bar"><div class="fill" style="width: 90%; background: #f89820;"></div></div>
+            <small>LVL 35 WIZARD</small>
+        </div>
+        <div class="stat-card">
+            <h4>NODE.JS</h4>
+            <div class="stat-bar"><div class="fill" style="width: 85%; background: #68a063;"></div></div>
+            <small>ASYNC ROGUE</small>
+        </div>
+        <div class="stat-card">
+            <h4>RUST</h4>
+            <div class="stat-bar"><div class="fill" style="width: 40%; background: #dea584;"></div></div>
+            <small>APPRENTICE</small>
+        </div>
+        <div class="stat-card">
+            <h4>PYTHON</h4>
+            <div class="stat-bar"><div class="fill" style="width: 60%; background: #4b8bbe;"></div></div>
+            <small>SCRIPT SORCERER</small>
+        </div>
+    </div>
 </section>
+
+<section class="inventory" style="margin-top: 4rem;">
+    <h2><span style="color: #fff;">></span> INVENTORY (PROJECTS)</h2>
+    <div class="project-grid">
+        <!-- Project 1 -->
+        <a href="https://github.com/norbu35/orchestra-js" class="cartridge-link" style="border:none; text-decoration:none;">
+            <div class="cartridge">
+                <div class="label" style="background: #f0f0f0;">
+                    <h3 style="color:#333;">ORCHESTRA</h3>
+                    <p style="color:#555;">JS Framework</p>
+                    <span style="font-size:0.7rem; color:#888;">RARITY: LEGENDARY</span>
+                </div>
+            </div>
+        </a>
+        
+        <!-- Project 2 -->
+        <a href="https://github.com/norbu35/tasky" class="cartridge-link" style="border:none; text-decoration:none;">
+            <div class="cartridge">
+                <div class="label" style="background: #e0f7fa;">
+                    <h3 style="color:#006064;">TASKY</h3>
+                    <p style="color:#00838f;">Productivity</p>
+                    <span style="font-size:0.7rem; color:#888;">RARITY: RARE</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Project 3 -->
+        <a href="#" class="cartridge-link" style="border:none; text-decoration:none;">
+            <div class="cartridge">
+                <div class="label" style="background: #fff3e0;">
+                    <h3 style="color:#e65100;">V-GARDEN</h3>
+                    <p style="color:#ef6c00;">Virtual Plants</p>
+                    <span style="font-size:0.7rem; color:#888;">RARITY: COMMON</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<section class="recent-logs" style="margin-top: 4rem;">
+    <h2><span style="color: #fff;">></span> MISSION LOGS</h2>
+    <ul class="post-list">
+    {% for page in section.pages | slice(end=3) %}
+        <li>
+            <span>{{ page.date | date(format="%Y-%m-%d") }}</span>
+            <a href="{{ page.permalink }}">{{ page.title }}</a>
+        </li>
+    {% else %}
+        <li style="color: #666;">// No logs found in database.</li>
+    {% endfor %}
+    </ul>
+</section>
+
+<script>
+    const lines = [
+        "Initializing Norbu.dev sequence...",
+        "Loading assets: 100%",
+        "Decrypting user profile...",
+        "WELCOME, USER.",
+        "System: READY."
+    ];
+    
+    let lineIndex = 0;
+    let charIndex = 0;
+    const outputDiv = document.getElementById('typing-output');
+    
+    function typeWriter() {
+        if (lineIndex < lines.length) {
+            const currentLine = lines[lineIndex];
+            
+            // Create line div if it doesn't exist
+            let lineDiv = document.getElementById(`line-${lineIndex}`);
+            if (!lineDiv) {
+                lineDiv = document.createElement('div');
+                lineDiv.id = `line-${lineIndex}`;
+                lineDiv.style.marginBottom = '5px';
+                // Last line white, others green
+                lineDiv.style.color = lineIndex === lines.length - 1 ? '#fff' : '#0f0'; 
+                outputDiv.appendChild(lineDiv);
+            }
+            
+            if (charIndex < currentLine.length) {
+                lineDiv.textContent += currentLine.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 30 + Math.random() * 50);
+            } else {
+                lineIndex++;
+                charIndex = 0;
+                setTimeout(typeWriter, 300);
+            }
+        }
+    }
+    
+    window.onload = function() {
+        setTimeout(typeWriter, 500);
+    };
+</script>
 {% endblock content %}
