@@ -276,11 +276,10 @@ main {
       margin-top: 5px;
   }
   
-  .prompt {
+  .terminal-prompt {
     color: $console-green;
     margin-right: 10px;
     white-space: nowrap;
-    &::before { content: none; }
   }
   
   #terminal-input {
