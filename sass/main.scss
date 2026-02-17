@@ -280,17 +280,19 @@ main {
     color: $console-green;
     margin-right: 10px;
     white-space: nowrap;
+    text-shadow: 0 0 5px $console-green;
   }
   
   #terminal-input {
       background: transparent;
       border: none;
-      color: #fff;
+      color: $console-green;
       font-family: 'Courier New', monospace;
       font-size: 1rem;
       width: 100%;
       outline: none;
       caret-color: $console-green;
+      text-shadow: 0 0 5px $console-green;
   }
   
   /* Output Styling */
