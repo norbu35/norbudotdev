@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'VT323';
+  src: url('/fonts/VT323.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // Colors
 $bg-color: #2b213a;
 $text-color: #fff0f5;
@@ -58,10 +65,6 @@ body {
 // Konami Code Easter Egg Mode
 body.konami-mode {
   filter: hue-rotate(180deg) invert(1);
-  
-  &::after { // Intensify scanlines
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(255, 0, 0, 0.5) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.1), rgba(0, 255, 0, 0.1), rgba(0, 0, 255, 0.1));
-  }
 }
 
 // CRT Screen Effect Overlay
