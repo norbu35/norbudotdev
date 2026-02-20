@@ -28,7 +28,7 @@
     </main>
 
     <footer>
-        <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author | default(value="Norbu") }} • Built with Zola & Rust 🦀</p>
+        <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author | default(value="Norbu") }} • Built with Zola & Rust 🦀 • <a href="{{ get_url(path="@/privacy-policy.md") }}">Privacy Policy</a></p>
     </footer>
 
     <script>
