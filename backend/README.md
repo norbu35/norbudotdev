@@ -26,7 +26,7 @@ This simple Python service connects your static website to a local Large Languag
     ```
 
 3.  **Run with Ollama Limits:**
-    The backend is configured to use `norbu-os` model by default with strict limits:
+    The backend is configured to use `echo` model by default with strict limits:
     *   **Rate Limit:** 5 requests per minute per IP.
     *   **Max Prompt:** 200 characters.
     *   **Max Response:** 150 tokens.
