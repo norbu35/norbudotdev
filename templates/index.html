@@ -3,7 +3,7 @@
 {% block content %}
 <section class="hero-terminal">
     <div class="terminal-window" id="main-terminal">
-        <canvas id="matrix-canvas" style="display:none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.3; pointer-events: none;"></canvas>
+        <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
         <div class="terminal-header">
             <span>ECHO v2.0</span>
             <span>CONN: SECURE</span>
@@ -11,104 +11,108 @@
         <div class="terminal-body">
             <div id="terminal-output"></div>
             <div class="input-line">
-                <span id="terminal-prefix" class="terminal-prompt">root@norbu:~$</span>
-                <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false" placeholder="Type 'help'...">
+                <span id="terminal-prefix" class="terminal-prompt">operator@transit:~$</span>
+                <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false" placeholder="Try: help, tour, services, axioms">
             </div>
         </div>
     </div>
 </section>
 
-<section class="character-sheet" style="margin-top: 4rem;">
-    <h2><span style="color: #fff;">></span> CHARACTER STATS</h2>
-    <div class="rpg-stats">
-        <div class="stat-card">
-            <h4>JAVA / SPRING</h4>
-            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="90%" style="background: #f89820;"></div></div>
-            <small>LVL 35 WIZARD</small>
+<section class="codex-overview section-block">
+    <h2><span class="prompt-angle">></span> OPERATOR DOCTRINE</h2>
+    <p class="section-lead">The system prefers continuity. Identity is reconciliation, not permission.</p>
+    <div class="doctrine-grid">
+        <article class="doctrine-card">
+            <h3>BOUNDARY</h3>
+            <p>Transit is the public edge. If a service is directly reachable, the surface is wrong.</p>
+            <p class="card-axiom">Transit decides what becomes reachable.</p>
+        </article>
+        <article class="doctrine-card">
+            <h3>IDENTITY</h3>
+            <p>Bastion validates alignment between presented identity and expected state.</p>
+            <p class="card-axiom">A rejected identity is unresolved, not denied.</p>
+        </article>
+        <article class="doctrine-card">
+            <h3>ISOLATION</h3>
+            <p>Internal services do not listen on public interfaces. The grid carries all internal intent.</p>
+            <p class="card-axiom">Internal services receive traffic. They do not accept it.</p>
+        </article>
+        <article class="doctrine-card">
+            <h3>CONTINUITY</h3>
+            <p>The Forge replaces components continuously while preserving available state.</p>
+            <p class="card-axiom">Continuity is maintained through replacement.</p>
+        </article>
+    </div>
+</section>
+
+<section class="surface-map section-block">
+    <h2><span class="prompt-angle">></span> SYSTEM SURFACES</h2>
+    <p class="section-lead">Observed interfaces and responsibilities in the current operating model.</p>
+    <div class="surface-table">
+        <div class="surface-row surface-head">
+            <span>Service</span>
+            <span>State</span>
+            <span>Role</span>
         </div>
-        <div class="stat-card">
-            <h4>NODE.JS</h4>
-            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="85%" style="background: #68a063;"></div></div>
-            <small>ASYNC ROGUE</small>
+        <div class="surface-row">
+            <span class="service-name">Transit</span>
+            <span class="service-state state-active">ACTIVE</span>
+            <span class="service-role">Terminates TLS, enforces policy, forwards admissible intent.</span>
         </div>
-        <div class="stat-card">
-            <h4>RUST</h4>
-            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="40%" style="background: #dea584;"></div></div>
-            <small>APPRENTICE</small>
+        <div class="surface-row">
+            <span class="service-name">Bastion</span>
+            <span class="service-state state-active">ACTIVE</span>
+            <span class="service-role">Identity alignment and session continuity.</span>
         </div>
-        <div class="stat-card">
-            <h4>PYTHON</h4>
-            <div class="stat-bar"><div class="fill" style="width: 0%;" data-fill="60%" style="background: #4b8bbe;"></div></div>
-            <small>SCRIPT SORCERER</small>
+        <div class="surface-row">
+            <span class="service-name">Echo</span>
+            <span class="service-state state-shift">VARIABLE</span>
+            <span class="service-role">Low-latency language interface with stateful effects.</span>
+        </div>
+        <div class="surface-row">
+            <span class="service-name">Argus</span>
+            <span class="service-state state-active">ACTIVE</span>
+            <span class="service-role">Telemetry aggregation; sequence may diverge from intuition.</span>
+        </div>
+        <div class="surface-row">
+            <span class="service-name">Spectre</span>
+            <span class="service-state state-shift">ANOMALOUS</span>
+            <span class="service-role">Task execution layer with occasional temporal inconsistencies.</span>
+        </div>
+        <div class="surface-row">
+            <span class="service-name">Relay</span>
+            <span class="service-state state-active">ACTIVE</span>
+            <span class="service-role">Ingress without direct exposure; outbound-established tunnel.</span>
         </div>
     </div>
 </section>
 
-<section class="inventory" style="margin-top: 4rem;">
-    <h2><span style="color: #fff;">></span> INVENTORY (PROJECTS)</h2>
-    <div class="project-grid">
-        <!-- Project 1 -->
-        <a href="https://github.com/norbu35/orchestra-js" class="cartridge-link" style="border:none; text-decoration:none;">
-            <div class="cartridge">
-                <div class="label" style="background: #f0f0f0;">
-                    <h3 style="color:#333;">ORCHESTRA</h3>
-                    <p style="color:#555;">JS Framework</p>
-                    <span style="font-size:0.7rem; color:#888;">RARITY: LEGENDARY</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- Project 2 -->
-        <a href="https://github.com/norbu35/tasky" class="cartridge-link" style="border:none; text-decoration:none;">
-            <div class="cartridge">
-                <div class="label" style="background: #e0f7fa;">
-                    <h3 style="color:#006064;">TASKY</h3>
-                    <p style="color:#00838f;">Productivity</p>
-                    <span style="font-size:0.7rem; color:#888;">RARITY: RARE</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Project 3 -->
-        <a href="#" class="cartridge-link" style="border:none; text-decoration:none;">
-            <div class="cartridge">
-                <div class="label" style="background: #fff3e0;">
-                    <h3 style="color:#e65100;">V-GARDEN</h3>
-                    <p style="color:#ef6c00;">Virtual Plants</p>
-                    <span style="font-size:0.7rem; color:#888;">RARITY: COMMON</span>
-                </div>
-            </div>
-        </a>
+<section class="anomaly-notes section-block">
+    <h2><span class="prompt-angle">></span> OBSERVED PHENOMENA</h2>
+    <div class="phenomena-grid">
+        <article class="phenomenon">
+            <h3>TEMPORAL DRIFT</h3>
+            <p>Monitoring events may appear before visible triggers.</p>
+        </article>
+        <article class="phenomenon">
+            <h3>STATE CONTINUITY</h3>
+            <p>System sessions persist to avoid discontinuity costs.</p>
+        </article>
+        <article class="phenomenon">
+            <h3>LATENCY VARIANCE</h3>
+            <p>Response time does not map linearly to compute time.</p>
+        </article>
+        <article class="phenomenon">
+            <h3>QUIET PRESSURE</h3>
+            <p>Sentry escalates observation frequency instead of alarms.</p>
+        </article>
     </div>
 </section>
 
-<section class="recent-logs" style="margin-top: 4rem;">
-    <h2><span style="color: #fff;">></span> MISSION LOGS</h2>
-    <ul class="post-list">
-    {% for page in section.pages | slice(end=3) %}
-        <li>
-            <span>{{ page.date | date(format="%Y-%m-%d") }}</span>
-            <a href="{{ page.permalink }}">{{ page.title }}</a>
-        </li>
-    {% else %}
-        <li style="color: #666;">// No logs found in database.</li>
-    {% endfor %}
-    </ul>
+<section class="canon-note section-block">
+    <blockquote>Logs describe events. They do not explain them.</blockquote>
+    <p>Use the terminal to explore: <code>tour</code>, <code>services</code>, <code>service echo</code>, <code>scan</code>, <code>axioms</code>.</p>
 </section>
 
 <script src="{{ get_url(path='js/terminal.js') }}"></script>
-<script>
-    // Animate Stats Bars on Scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.querySelectorAll('.fill').forEach(bar => {
-                    bar.style.width = bar.getAttribute('data-fill');
-                });
-            }
-        });
-    });
-    
-    document.querySelectorAll('.rpg-stats').forEach(stat => observer.observe(stat));
-</script>
 {% endblock content %}
