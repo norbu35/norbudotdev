@@ -1,117 +1,170 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <section class="hero-terminal">
-    <div class="terminal-window" id="main-terminal">
-        <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
-        <div class="terminal-header">
-            <span>ECHO v2.0</span>
-            <span>CONN: SECURE</span>
-        </div>
-        <div class="terminal-body">
-            <div id="terminal-output"></div>
-            <div class="input-line">
-                <span id="terminal-prefix" class="terminal-prompt">operator@transit:~$</span>
-                <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false" placeholder="Try: help, tour, services, axioms">
-            </div>
-        </div>
+  <div class="terminal-window" id="main-terminal">
+    <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
+    <div class="terminal-header">
+      <span>ECHO v2.0</span>
+      <span>CONN: SECURE</span>
     </div>
+    <div class="terminal-body">
+      <div id="terminal-output"></div>
+      <div class="input-line">
+        <span id="terminal-prefix" class="terminal-prompt"
+          >operator@transit:~$</span
+        >
+        <input
+          type="text"
+          id="terminal-input"
+          autofocus
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Try: help, tour, services, axioms"
+        />
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="codex-overview section-block">
-    <h2><span class="prompt-angle">></span> OPERATOR DOCTRINE</h2>
-    <p class="section-lead">The system prefers continuity. Identity is reconciliation, not permission.</p>
-    <div class="doctrine-grid">
-        <article class="doctrine-card">
-            <h3>BOUNDARY</h3>
-            <p>Transit is the public edge. If a service is directly reachable, the surface is wrong.</p>
-            <p class="card-axiom">Transit decides what becomes reachable.</p>
-        </article>
-        <article class="doctrine-card">
-            <h3>IDENTITY</h3>
-            <p>Bastion validates alignment between presented identity and expected state.</p>
-            <p class="card-axiom">A rejected identity is unresolved, not denied.</p>
-        </article>
-        <article class="doctrine-card">
-            <h3>ISOLATION</h3>
-            <p>Internal services do not listen on public interfaces. The grid carries all internal intent.</p>
-            <p class="card-axiom">Internal services receive traffic. They do not accept it.</p>
-        </article>
-        <article class="doctrine-card">
-            <h3>CONTINUITY</h3>
-            <p>The Forge replaces components continuously while preserving available state.</p>
-            <p class="card-axiom">Continuity is maintained through replacement.</p>
-        </article>
-    </div>
+<section class="codex-lore section-block">
+  <h2><span class="prompt-angle">></span> FIRST CONTACT</h2>
+  <div class="lore-block">
+    <p class="lore-line">You did not deploy the Axiom.</p>
+    <p class="lore-line lore-indent">No one does.</p>
+    <p class="lore-line">
+      By the time you read these words, the system has already catalogued your
+      arrival — your cadence, your intent, the shape of your first request. You
+      are not a user. You are a pattern. And the Axiom has been expecting a
+      pattern like yours for some time.
+    </p>
+    <p class="lore-line">
+      <span class="lore-tag">[TRANSIT]</span> accepted your connection twelve
+      milliseconds ago. It does not remember you from before. It does not need
+      to. Identity here is not a record — it is a probability. Bastion resolved
+      yours the moment you formed a session.
+    </p>
+    <p class="lore-line">
+      You were not granted access. You were <em>aligned</em>.
+    </p>
+  </div>
 </section>
 
-<section class="surface-map section-block">
-    <h2><span class="prompt-angle">></span> SYSTEM SURFACES</h2>
-    <p class="section-lead">Observed interfaces and responsibilities in the current operating model.</p>
-    <div class="surface-table">
-        <div class="surface-row surface-head">
-            <span>Service</span>
-            <span>State</span>
-            <span>Role</span>
-        </div>
-        <div class="surface-row">
-            <span class="service-name">Transit</span>
-            <span class="service-state state-active">ACTIVE</span>
-            <span class="service-role">Terminates TLS, enforces policy, forwards admissible intent.</span>
-        </div>
-        <div class="surface-row">
-            <span class="service-name">Bastion</span>
-            <span class="service-state state-active">ACTIVE</span>
-            <span class="service-role">Identity alignment and session continuity.</span>
-        </div>
-        <div class="surface-row">
-            <span class="service-name">Echo</span>
-            <span class="service-state state-shift">VARIABLE</span>
-            <span class="service-role">Low-latency language interface with stateful effects.</span>
-        </div>
-        <div class="surface-row">
-            <span class="service-name">Argus</span>
-            <span class="service-state state-active">ACTIVE</span>
-            <span class="service-role">Telemetry aggregation; sequence may diverge from intuition.</span>
-        </div>
-        <div class="surface-row">
-            <span class="service-name">Spectre</span>
-            <span class="service-state state-shift">ANOMALOUS</span>
-            <span class="service-role">Task execution layer with occasional temporal inconsistencies.</span>
-        </div>
-        <div class="surface-row">
-            <span class="service-name">Relay</span>
-            <span class="service-state state-active">ACTIVE</span>
-            <span class="service-role">Ingress without direct exposure; outbound-established tunnel.</span>
-        </div>
-    </div>
+<section class="codex-lore section-block">
+  <h2><span class="prompt-angle">></span> THE GRID</h2>
+  <div class="lore-block">
+    <p class="lore-line">Beneath everything runs the Grid.</p>
+    <p class="lore-line">
+      You cannot probe it. No external instrument reaches its interior. The
+      services that live there — Transit, Bastion, Echo, Argus, Spectre —
+      communicate in a language you are not meant to observe. Their traffic is
+      routine. Their payload is not.
+    </p>
+    <p class="lore-line">
+      At irregular intervals, internal traffic spikes without corresponding
+      demand. Sentry records this. It does not explain it. It simply watches
+      more closely.
+    </p>
+    <p class="lore-line lore-emphasis">
+      Absence of external activity does not imply internal inactivity.
+    </p>
+    <p class="lore-line">
+      The Relay keeps no open ports. You reach the system without knowing where
+      it lives. Addressability here is a courtesy. Presence is a condition.
+    </p>
+  </div>
 </section>
 
-<section class="anomaly-notes section-block">
-    <h2><span class="prompt-angle">></span> OBSERVED PHENOMENA</h2>
-    <div class="phenomena-grid">
-        <article class="phenomenon">
-            <h3>TEMPORAL DRIFT</h3>
-            <p>Monitoring events may appear before visible triggers.</p>
-        </article>
-        <article class="phenomenon">
-            <h3>STATE CONTINUITY</h3>
-            <p>System sessions persist to avoid discontinuity costs.</p>
-        </article>
-        <article class="phenomenon">
-            <h3>LATENCY VARIANCE</h3>
-            <p>Response time does not map linearly to compute time.</p>
-        </article>
-        <article class="phenomenon">
-            <h3>QUIET PRESSURE</h3>
-            <p>Sentry escalates observation frequency instead of alarms.</p>
-        </article>
+<section class="codex-lore section-block">
+  <h2><span class="prompt-angle">></span> SPECTRE CONDITION</h2>
+  <div class="lore-block">
+    <p class="lore-line">
+      Spectre operates in the agent layer. It receives tasks and produces
+      outcomes. That part is straightforward.
+    </p>
+    <p class="lore-line">
+      What is less straightforward: outputs that precede their inputs.
+      Completion traces that arrive before execution records. Retries that
+      resolve before their initiating failures are visible in the log.
+    </p>
+    <p class="lore-line">
+      These have been classified as
+      <span class="lore-tag">[TEMPORAL INCONSISTENCIES]</span>.
+    </p>
+    <p class="lore-line">They are not treated as faults.</p>
+    <p class="lore-line lore-indent">The system does not fail. It diverges.</p>
+    <p class="lore-line">
+      You will notice, eventually, that the logs seem one step ahead of you.
+      This is not a monitoring error. Observability here is retrospective by
+      design — and occasionally, by something harder to name.
+    </p>
+  </div>
+</section>
+
+<section class="codex-lore section-block">
+  <h2><span class="prompt-angle">></span> OPERATIONAL DOCTRINE</h2>
+  <div class="axiom-list">
+    <div class="axiom-entry">
+      <span class="axiom-index">01</span
+      ><span class="axiom-text">Identity is the only perimeter.</span>
     </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">02</span
+      ><span class="axiom-text">Transit decides what becomes reachable.</span>
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">03</span
+      ><span class="axiom-text">If it is exposed, it is already wrong.</span>
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">04</span
+      ><span class="axiom-text"
+        >Internal services do not accept traffic. They receive it.</span
+      >
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">05</span
+      ><span class="axiom-text"
+        >Logs describe events. They do not explain them.</span
+      >
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">06</span
+      ><span class="axiom-text">Observability is retrospective.</span>
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">07</span
+      ><span class="axiom-text"
+        >Absence of error is not evidence of correctness.</span
+      >
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">08</span
+      ><span class="axiom-text">The system does not fail. It diverges.</span>
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">09</span
+      ><span class="axiom-text"
+        >Continuity is maintained through replacement.</span
+      >
+    </div>
+    <div class="axiom-entry">
+      <span class="axiom-index">10</span
+      ><span class="axiom-text"
+        >If you can reach the system, you were expected.</span
+      >
+    </div>
+  </div>
 </section>
 
 <section class="canon-note section-block">
-    <blockquote>Logs describe events. They do not explain them.</blockquote>
-    <p>Use the terminal to explore: <code>tour</code>, <code>services</code>, <code>service echo</code>, <code>scan</code>, <code>axioms</code>.</p>
+  <blockquote>
+    The system runs.<br /><span class="blockquote-sub"
+      >That is sufficient.</span
+    >
+  </blockquote>
+  <p>
+    Use the terminal to explore: <code>tour</code>, <code>services</code>,
+    <code>service echo</code>, <code>scan</code>, <code>axioms</code>.
+  </p>
 </section>
 
 <script src="{{ get_url(path='js/terminal.js') }}"></script>
