@@ -1,0 +1,172 @@
+:root {
+  --bg-color: #04060b;
+  --panel-color: rgba(7, 11, 22, 0.82);
+  --text-primary: #d3ddf2;
+  --text-dim: #8090af;
+  --accent-color: #ff4fa3;
+  --link-color: #63e8ff;
+  --border-color: #264267;
+  --console-green: #74ceff;
+  --console-bg: #01040b;
+
+  --neon-cyan: #00ffff;
+  --neon-magenta: #ff00ff;
+
+  --font-pixel: var(--font-vt323), monospace;
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  font-size: 20px;
+  line-height: 1.52;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(2, 4, 8, 0.95);
+  border-left: 1px solid rgba(118, 245, 255, 0.15);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 96, 117, 0.75),
+    rgba(118, 245, 255, 0.75)
+  );
+  border: 2px solid rgba(2, 4, 8, 0.95);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-color), var(--link-color));
+}
+
+/* Base Terminal Text */
+.pixel-text {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.05em;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 1.3em;
+  margin-bottom: 0.55em;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-color);
+  text-shadow:
+    0 0 14px rgba(255, 79, 163, 0.22),
+    0 0 30px rgba(99, 232, 255, 0.1);
+}
+
+h1 {
+  margin-top: 0;
+}
+h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+}
+h3 {
+  font-size: clamp(1.08rem, 2vw, 1.34rem);
+}
+
+/* CRT Scanline Effect Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+  background-size: 100% 4px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Links */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(99, 232, 255, 0.52);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    text-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    color: #def8ff;
+    border-color: var(--link-color);
+    text-shadow: 0 0 9px rgba(99, 232, 255, 0.5);
+  }
+}
+
+/* Wallpaper Effects */
+.axiom-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  image-rendering: pixelated;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      circle at 18% 16%,
+      rgba(75, 126, 255, 0.22) 0%,
+      rgba(75, 126, 255, 0) 40%
+    ),
+    radial-gradient(
+      circle at 86% 68%,
+      rgba(255, 93, 127, 0.2) 0%,
+      rgba(255, 93, 127, 0) 42%
+    ),
+    linear-gradient(180deg, #060a14 0%, #05080f 38%, #02040a 100%);
+}
+
+.city-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background:
+    radial-gradient(
+      circle at 50% 62%,
+      rgba(9, 16, 26, 0) 0%,
+      rgba(5, 8, 14, 0.36) 38%,
+      rgba(2, 4, 8, 0.85) 86%
+    ),
+    linear-gradient(180deg, rgba(4, 7, 12, 0) 50%, rgba(2, 4, 8, 0.46) 100%);
+  mix-blend-mode: multiply;
+}
+
+.city-pixelate {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: 0.6;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.4) 50%, rgba(255, 255, 255, 0) 50%),
+    linear-gradient(90deg, rgba(8, 11, 17, 0.4) 50%, rgba(255, 255, 255, 0) 50%);
+  background-size: 6px 6px;
+  backdrop-filter: saturate(1.4) contrast(1.2);
+  pointer-events: none;
+}

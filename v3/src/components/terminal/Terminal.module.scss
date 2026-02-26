@@ -1,0 +1,109 @@
+.terminalContainer {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  min-height: 400px;
+  background: var(--console-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 18px rgba(0, 0, 0, 0.8),
+    0 0 24px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-pixel);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--link-color));
+    box-shadow: 0 0 10px var(--link-color);
+    z-index: 3;
+  }
+}
+
+.terminalHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--panel-color);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.terminalBody {
+  flex-grow: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+  }
+}
+
+.terminalOutput {
+  margin-bottom: 1rem;
+}
+
+.historyEntry {
+  margin-bottom: 0.75rem;
+}
+
+.commandLine {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.prompt {
+  color: var(--console-green);
+}
+
+.command {
+  color: #fff;
+}
+
+.response {
+  color: var(--text-dim);
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.systemMsg {
+  color: var(--text-dim);
+  margin-bottom: 0.35rem;
+  font-style: italic;
+}
+
+.inputArea {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: auto;
+}
+
+.input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  caret-color: var(--console-green);
+}
